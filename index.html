@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <button id="btn">click</button>
+
+  <script src="reactivity.js"></script>
+  <script>
+    const root = document.querySelector('#app');
+    const btn = document.querySelector('#btn');
+
+    let obj = reactive({
+      name: 'djtao',
+      age: 18
+    });
+
+    let double = computed(() => obj.age * 2);
+
+    effect(() => {
+      console.log(`数据变更为`, obj);
+      root.innerHTML = `<h3>Name(监听属性):${obj.name}</h3>
+      <p>Age(监听属性):${obj.age}</p><p>double(计算属性):${double.value}</p>`;
+    });
+
+    btn.addEventListener('click', e => {
+      obj.name = 'dangjingtao';
+      obj.age += 1;
+    })
+
+  </script>
+</body>
+
+</html>
